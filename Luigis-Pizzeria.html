@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <html>
+  <head>
+    <link rel="stylesheet" href="stylesprojects.css">
+  </head>
+  <body>
+    <button onclick="window.location.href='./index.html';" class="nav-back-button">Main Menu</button>
+
+    <div class="carousel" id="carousel">
+        <ul class="carousel__list" id="carousel-list">
+            <li class="carousel__item is-transitioning-in">
+                <div class="carousel__title">
+                  <span class="carousel__title-text">
+                  Technical Expertise: Gained practical experience in designing and implementing a complex web-based system, enhancing my proficiency in web development and database management.
+                </span>
+                </div>
+                <img class="carousel__image" src="./images/homepage.jpeg" alt="Landscape with Balloons" />
+            </li>
+            <li class="carousel__item">
+                <div class="carousel__title">
+                  <span class="carousel__title-text">
+                  Leadership and Team Management: Developed strong leadership skills by overseeing project planning and execution, ensuring alignment with project goals and timelines.
+                </span>
+                </div>
+                <img class="carousel__image" src="./images/menupizzas.jpeg" alt="Landscape of Canyons" />
+            </li>
+            <li class="carousel__item">
+                <div class="carousel__title">
+                  <span class="carousel__title-text">
+                  Problem-Solving and Conflict Resolution: Enhanced my ability to resolve group challenges effectively, focusing on constructive solutions and fostering a supportive team environment.
+                </span>
+                </div>
+                <img class="carousel__image" src="./images/menudrinks.jpeg" alt="Landscape of Grass" />
+            </li>
+            <li class="carousel__item">
+                <div class="carousel__title">
+                  <span class="carousel__title-text">
+                  Communication and Collaboration: Improved my communication skills, facilitating clear and open discussions within the team to reach consensus and maintain project momentum.
+                </span>
+                </div>
+                <img class="carousel__image" src="./images/thankyoufororder.jpg" alt="Landscape with Lake" />
+            </li>
+        </ul>
+        <nav class="carousel__navigation">
+            <button class="carousel__button carousel__button--previous" id="carousel-previous">←</button>
+            <button class="carousel__button carousel__button--next" id="carousel-next">→</button>
+        </nav>
+    </div>
+    <!-- Carousel: Script -->
+    <script>
+      /**
+       *
+       * UI Elements
+       */
+      const $carousel = document.getElementById("carousel");
+      const $list = document.getElementById("carousel-list");
+      const $previous = document.getElementById("carousel-previous");
+      const $next = document.getElementById("carousel-next");
+
+      /**
+       *
+       * Variables
+       */
+      const limit = 3;
+      let timeout;
+      let index = 0;
+      let current = $list.children[index];
+      let previous = current;
+
+      /**
+       *
+       * Here is where
+       * the magic happens
+       */
+      const animate = function (type = "increment") {
+        // Performance update
+        // Didn't show in class
+        if (timeout) {
+          clearTimeout(timeout);
+        }
+
+        // Remove transitioning classes to the carousel
+        $carousel.classList.remove("is-transitioning");
+
+        // What direction?
+        if (type === "increment") {
+          $carousel.classList.remove("is-transitioning-inversed");
+        }
+
+        if (type === "decrement") {
+          $carousel.classList.add("is-transitioning-inversed");
+        }
+
+        // Asign current to previous
+        previous = current;
+
+        // Wait for next frame to apply the transition
+        timeout = setTimeout(function () {
+          $carousel.classList.add("is-transitioning");
+
+          // Add transition classes to the item
+          previous.classList.remove("is-transitioning-in");
+          previous.classList.add("is-transitioning-out");
+
+          // Remove transition out class after 500ms
+          timeout = setTimeout(function () {
+            clearTimeout(timeout);
+            $carousel.classList.remove("is-transitioning");
+            previous.classList.remove("is-transitioning-out");
+          }, 500);
+
+          // Increment index
+          if (type === "increment") {
+            index += 1;
+          }
+
+          // Decrement index
+          if (type === "decrement") {
+            index -= 1;
+          }
+
+          // When index is 0 reset to limit
+          if (index < 0) {
+            index = limit;
+          }
+
+          // When index is limit reset to 0
+          if (index > limit) {
+            index = 0;
+          }
+
+          // Re-assign current
+          current = $list.children[index];
+          current.classList.add("is-transitioning-in");
+
+          // Log it
+          //   console.log(index, previous, current);
+        }, 16);
+      };
+
+      /**
+       *
+       * Event Listeners
+       */
+      $previous.onclick = function () {
+        animate("decrement");
+      };
+
+      $next.onclick = function () {
+        animate("increment");
+      };
+    </script>
+  </body>
+</html>
+
+    

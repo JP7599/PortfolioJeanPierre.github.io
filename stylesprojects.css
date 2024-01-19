@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+      
+@font-face {
+font-family: 'LEMONMILK';
+src: url('./assets/fonts/LEMONMILK-Medium.otf') format('opentype');
+font-weight: normal;
+font-style: normal;
+}
+
+
+
+/* nav */
+
+.nav-back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background-color: rgba(128, 128, 128, 0.5);
+  font-family: "LEMONMILK"; 
+  color: #023047;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* end nav */
+
+:root {
+  --scale: (100vw / 1440);
+  --color-light: #fdfdfd;
+  --color-dark: #0a0a0a;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-light);
+}
+
+body * {
+  box-sizing: border-box;
+}
+
+.carousel {
+  padding: calc(var(--scale) * 100) calc(var(--scale) * 200) 0;
+}
+
+.carousel.is-transitioning {
+  pointer-events: none;
+}
+
+.carousel__list {
+  position: relative;
+  margin: 0;
+  padding: 0 0 calc((800 / 1440) * 100%);
+  width: 100%;
+  list-style: none;
+  overflow: hidden;
+}
+
+.carousel__item {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Transition Class */
+.carousel.is-transitioning .carousel__item,
+.carousel.is-transitioning .carousel__image,
+.carousel.is-transitioning .carousel__heading {
+  transition: 500ms transform cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: transform;
+}
+
+/* Normal Direction */
+.carousel__item {
+  transform: translateX(100%);
+}
+
+.carousel__item.is-transitioning-in {
+  transform: translateX(0%);
+}
+
+.carousel__item.is-transitioning-out {
+  transform: translateX(-100%);
+}
+
+/* Reversed Direction */
+.carousel.is-transitioning-inversed .carousel__item {
+  transform: translateX(-100%);
+}
+
+.carousel.is-transitioning-inversed .carousel__item.is-transitioning-in {
+  transform: translateX(0%);
+}
+
+.carousel.is-transitioning-inversed .carousel__item.is-transitioning-out {
+  transform: translateX(100%);
+}
+
+/* Advanced Animation */
+.carousel__item .carousel__image {
+  transform: translateX(-50%);
+}
+
+.carousel__item.is-transitioning-in .carousel__image {
+  transform: translateX(0%);
+}
+
+.carousel__item.is-transitioning-out .carousel__image {
+  transform: translateX(50%);
+}
+
+/* Advanced Animation: Reversed Direction */
+.carousel.is-transitioning-inversed .carousel__item .carousel__image {
+  transform: translateX(50%);
+}
+
+.carousel.is-transitioning-inversed .carousel__item.is-transitioning-in .carousel__image {
+  transform: translateX(0%);
+}
+
+.carousel.is-transitioning-inversed .carousel__item.is-transitioning-out .carousel__image {
+  transform: translateX(-50%);
+}
+
+/* Advanced Text Animation */
+.carousel__item .carousel__heading {
+  transform: translateX(100%);
+}
+
+.carousel__item.is-transitioning-in .carousel__heading {
+  transform: translateX(0%);
+}
+
+.carousel__item.is-transitioning-out .carousel__heading {
+  transform: translateX(-100%);
+}
+
+/* Advanced Text Animation: Reversed Direction */
+.carousel.is-transitioning-inversed .carousel__item .carousel__heading {
+  transform: translateX(-100%);
+}
+
+.carousel.is-transitioning-inversed .carousel__item.is-transitioning-in .carousel__heading {
+  transform: translateX(0%);
+}
+
+.carousel.is-transitioning-inversed .carousel__item.is-transitioning-out .carousel__heading {
+  transform: translateX(100%);
+}
+
+.carousel__image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel__heading {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  letter-spacing: -0.05em;
+  font-size: calc(var(--scale) * 10);
+  font-family: "LEMONMILK";
+  color: #023047;
+}
+
+.carousel__heading-text {
+background-color: rgba(255, 255, 255, 0.7); 
+color: #023047; 
+padding: 2px 5px; 
+border-radius: 5px; 
+}
+
+
+.carousel__navigation {
+  display: flex;
+  justify-content: space-between;
+
+  margin: calc(var(--scale) * 40) 0 0;
+}
+
+.carousel__button {
+  position: relative;
+  overflow: hidden;
+
+  width: calc(var(--scale) * 55);
+  height: calc(var(--scale) * 55);
+  background: transparent;
+  border: 2px solid var(--color-dark);
+  border-radius: 50%;
+  font-size: calc(var(--scale) * 10);
+  color: var(--color-dark);
+  cursor: pointer;
+}
+
+.carousel__title {
+padding: 10px;
+text-align: center;
+background-color: rgba(255, 255, 255, 0.7); 
+color: #023047; 
+border-radius: 5px; 
+margin-bottom: 10px; /* Space between title and image */
+}
+
+.carousel__title-text {
+font-size: calc(var(--scale) * 18); /* Adjust font size as needed */
+font-family: "LEMONMILK";
+}
